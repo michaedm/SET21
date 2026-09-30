@@ -7,6 +7,6 @@ Teamet: Sakaria: Frontend,
         Jenny: Frontend,
         Michael: Backend og database,
         Ishaq: backend,
-        Benjamin: Backend
+        Benjamin: Backend.
 
 Installasjon og kjøring:
