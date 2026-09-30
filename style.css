@@ -1,0 +1,66 @@
+:root {
+    --basic-gray: #a8a3a3;
+    --basic-red: #ff0000;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    column-gap: 2rem;
+    align-items: start;
+    margin: 0;
+    padding: 0 2rem 3rem;
+}
+
+header {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logo {
+    width: 8rem;
+    height: auto;
+}
+
+.nav {
+    background-color: rgb(248, 246, 243);
+    padding: 1rem 1.2rem;
+    min-height: 16rem;
+    text-align: left;
+}
+
+
+
+.nav a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.admin-knapp {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #d7d5d5;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    
+}
+
+section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1rem;
+}
+
+.article_img {
+     width: 8rem;
+    height: auto;
+
+}
+article {
+    background: #fff9f9;
+    padding: 1rem;
+}
+
