@@ -19,9 +19,19 @@ header {
     gap: 2rem;
 }
 
+header h1 {
+    font-size: 2rem;            
+    color: #000000;               
+    font-weight: bold;            
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
 .logo {
     width: 8rem;
     height: auto;
+    padding: 1rem 2rem;
 }
 
 .nav {
@@ -31,7 +41,10 @@ header {
     text-align: left;
 }
 
-
+.nav ul {
+    list-style: none;
+    padding: 0;
+}
 
 .nav a {
     text-decoration: none;
