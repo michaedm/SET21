@@ -57,10 +57,18 @@ section {
 .article_img {
      width: 8rem;
     height: auto;
+    float: right;
 
 }
 article {
     background: #fff9f9;
     padding: 1rem;
+}
+
+article time {
+    display: block;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 8px;
 }
 
