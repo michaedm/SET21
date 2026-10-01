@@ -36,6 +36,16 @@ header h1 {
     padding: 1rem 2rem;
 }
 
+.logginn-knapp {
+    margin-left: auto;  
+    padding: 8px 20px;
+    border: 2px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #000000;
+}
+
 .nav {
     background: white;
     text-align: left;
@@ -72,23 +82,22 @@ header h1 {
     background-color: #e0d2d2;
 }
 
-section {
+#nyheter {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
     gap: 1rem;
 }
 
-.article_img {
-    float: right;
-    width: 100px;
-    margin: 0 0 8px 16px;
-    border-radius: 6px;
-
-}
 article {
+    display: flex;
+    flex-direction: column;
     background: #fff9f9;
     padding: 1rem;
     border-radius: 6px;
+}
+
+article h3 {
+    margin: 0 0 4px;
 }
 
 article time {
@@ -96,5 +105,24 @@ article time {
     font-size: 0.85rem;
     color: #7f6767;
     margin-bottom: 8px;
+    text-align: left;
 }
 
+article p {
+    margin: 0 0 12px;
+}
+
+article a {
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+    align-self: flex-end;
+}
+
+.article_img {
+    align-self:flex-start;  
+    margin-top: auto;       
+    width: 100px;
+    height: auto;
+    border-radius: 6px;
+}
