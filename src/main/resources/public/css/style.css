@@ -1,6 +1,7 @@
 :root {
     --basic-gray: #a8a3a3;
     --basic-red: #ff0000;
+    
 }
 
 body {
@@ -10,6 +11,7 @@ body {
     align-items: start;
     margin: 0;
     padding: 0 2rem 3rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 header {
@@ -35,15 +37,24 @@ header h1 {
 }
 
 .nav {
-    background-color: rgb(248, 246, 243);
-    padding: 1rem 1.2rem;
-    min-height: 16rem;
+    background: white;
     text-align: left;
+    padding: 24px;
+    border-radius: 10px;
 }
 
 .nav ul {
     list-style: none;
     padding: 0;
+}
+
+.nav li a {
+    display: block;
+    padding: 5px 7px;
+    border-radius: 3px;
+    color: #434242;
+    text-decoration: none;
+
 }
 
 .nav a {
@@ -52,13 +63,13 @@ header h1 {
 }
 
 .admin-knapp {
-    display: inline-block;
-    padding: 8px 20px;
-    background-color: #d7d5d5;
-    color: white;
+    display: block;
+    text-align: center;
+    padding: 5px 5px;
     text-decoration: none;
-    font-weight: bold;
-    
+    border-radius: 6px;
+    font-weight: 600;
+    background-color: #e0d2d2;
 }
 
 section {
@@ -68,20 +79,22 @@ section {
 }
 
 .article_img {
-     width: 8rem;
-    height: auto;
     float: right;
+    width: 100px;
+    margin: 0 0 8px 16px;
+    border-radius: 6px;
 
 }
 article {
     background: #fff9f9;
     padding: 1rem;
+    border-radius: 6px;
 }
 
 article time {
     display: block;
     font-size: 0.85rem;
-    color: #666;
+    color: #7f6767;
     margin-bottom: 8px;
 }
 
