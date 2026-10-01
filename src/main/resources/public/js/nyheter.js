@@ -1,6 +1,9 @@
 
 fetch("mock-nyheter.json")
-    .then(Response => Response.json())
+    .then(Response => {
+        if(!Response.ok) throw new Error("Feil: " + Response.status);
+        return Response.json();
+    })
     .then(nyheter => {
          
         const container = document.querySelector("#nyheter");
@@ -11,7 +14,8 @@ fetch("mock-nyheter.json")
             kort.innerHTML = `
                  <h3>${nyhet.tittel}</h3>
                  <p>${nyhet.innhold}</p>
-                 <small>${nyhet.publisert_dato}</small>
+                 <p>${nyhet.publisert_dato}</p>
+                 <a href="#">Les mer</a>
             `;
 
             container.appendChild(kort);
