@@ -1,6 +1,7 @@
 :root {
     --basic-gray: #a8a3a3;
     --basic-red: #ff0000;
+    
 }
 
 body {
@@ -10,6 +11,7 @@ body {
     align-items: start;
     margin: 0;
     padding: 0 2rem 3rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 header {
@@ -19,19 +21,51 @@ header {
     gap: 2rem;
 }
 
+header h1 {
+    font-size: 2rem;            
+    color: #000000;               
+    font-weight: bold;            
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
 .logo {
     width: 8rem;
     height: auto;
+    padding: 1rem 2rem;
+}
+
+.logginn-knapp {
+    margin-left: auto;  
+    padding: 8px 20px;
+    border: 2px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #000000;
 }
 
 .nav {
-    background-color: rgb(248, 246, 243);
-    padding: 1rem 1.2rem;
-    min-height: 16rem;
+    background: white;
     text-align: left;
+    padding: 24px;
+    border-radius: 10px;
 }
 
+.nav ul {
+    list-style: none;
+    padding: 0;
+}
 
+.nav li a {
+    display: block;
+    padding: 5px 7px;
+    border-radius: 3px;
+    color: #434242;
+    text-decoration: none;
+
+}
 
 .nav a {
     text-decoration: none;
@@ -39,36 +73,56 @@ header {
 }
 
 .admin-knapp {
-    display: inline-block;
-    padding: 8px 20px;
-    background-color: #d7d5d5;
-    color: white;
+    display: block;
+    text-align: center;
+    padding: 5px 5px;
     text-decoration: none;
-    font-weight: bold;
-    
+    border-radius: 6px;
+    font-weight: 600;
+    background-color: #e0d2d2;
 }
 
-section {
+#nyheter {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
     gap: 1rem;
 }
 
-.article_img {
-     width: 8rem;
-    height: auto;
-    float: right;
-
-}
 article {
+    display: flex;
+    flex-direction: column;
     background: #fff9f9;
     padding: 1rem;
+    border-radius: 6px;
+}
+
+article h3 {
+    margin: 0 0 4px;
 }
 
 article time {
     display: block;
     font-size: 0.85rem;
-    color: #666;
+    color: #7f6767;
     margin-bottom: 8px;
+    text-align: left;
 }
 
+article p {
+    margin: 0 0 12px;
+}
+
+article a {
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+    align-self: flex-end;
+}
+
+.article_img {
+    align-self:flex-start;  
+    margin-top: auto;       
+    width: 100px;
+    height: auto;
+    border-radius: 6px;
+}
