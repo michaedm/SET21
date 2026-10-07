@@ -19,6 +19,6 @@ document.getElementById("login-skjema").addEventListener("submit", async (event)
     if (error) {
         melding.textContent = "Feil e-post eller passord"
     }  else{
-        window.location.href
+        window.location.href = "index.html";
     }
 });
