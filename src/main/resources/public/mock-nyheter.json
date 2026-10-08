@@ -1,0 +1,34 @@
+[
+  {
+    "nyhet_id": 4,
+    "tittel": "Julemarked på husflidsstua",
+    "innhold": "Kom og se håndverk fra medlemmene våre.",
+    "bilde_url": null,
+    "publisert_dato": "2026-09-27",
+    "lokallag_id": 1
+  },
+  {
+    "nyhet_id": 3,
+    "tittel": "Ledige plasser på vevkurs",
+    "innhold": "Vi har fortsatt noen ledige plasser på vevkurset i Sarpsborg.",
+    "bilde_url": null,
+    "publisert_dato": "2026-09-25",
+    "lokallag_id": 2
+  },
+  {
+    "nyhet_id": 2,
+    "tittel": "Bunadskurs fullt, ekstra kurs opprettet",
+    "innhold": "Kurset ble så populært at vi har satt opp et ekstra kurs.",
+    "bilde_url": null,
+    "publisert_dato": "2026-09-22",
+    "lokallag_id": 1
+  },
+  {
+    "nyhet_id": 1,
+    "tittel": "Nytt strikkekurs starter i oktober",
+    "innhold": "Vi starter et nytt strikkekurs for nybegynnere. Påmelding åpner snart.",
+    "bilde_url": null,
+    "publisert_dato": "2026-09-20",
+    "lokallag_id": 1
+  }
+]
