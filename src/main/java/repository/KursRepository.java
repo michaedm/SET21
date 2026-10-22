@@ -13,7 +13,7 @@ import java.util.List;
 
 public class KursRepository {
 
-    private final Dotenv env = Dotenv.load();
+    private final Dotenv env = Dotenv.configure().ignoreIfMissing().load();
     private final HttpClient client = HttpClient.newHttpClient();
     private final ObjectMapper mapper = new ObjectMapper();
 
