@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurs - Østfold Husflidslag</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/kurs.css">
+</head>
+<body>
+    <header>
+        <img class="logo" src="img/nh-logo.jpg" alt="Norges Husflidslag">
+        <h1>Østfold husflid</h1>
+        <a href="login.html" class="logginn-knapp">Logg inn</a>
+    </header>
+
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Siste nytt</a></li>
+            <li><a href="#">Finn lokallag</a></li>
+            <li><a href="kurs.html" aria-current="page">Kurs</a></li>
+            <li><a href="#">Kontakt oss</a></li>
+        </ul>
+        <aside>
+            <a href="admin.html" class="admin-knapp">Admin</a>
+        </aside>
+    </nav>
+
+    <main>
+        <h2>Kurs</h2>
+        <p class="ingress">Lær noe nytt, ta med deg garnet og møt andre som liker å skape. Velg en kategori eller se alle kursene.</p>
+
+        <fieldset class="filter">
+            <legend>Velg kategori</legend>
+
+            <input type="radio" name="kat" id="f-alle" checked>
+            <label for="f-alle">Alle</label>
+
+            <input type="radio" name="kat" id="f-strikk">
+            <label for="f-strikk">Strikking</label>
+
+            <input type="radio" name="kat" id="f-hekling">
+            <label for="f-hekling">Hekling</label>
+
+            <input type="radio" name="kat" id="f-sy">
+            <label for="f-sy">Søm og vev</label>
+
+            <section class="kurs-liste">
+                <article class="kurs-kort utvalgt" data-kat="strikk">
+                    <time class="dato" datetime="2026-11-02"><span class="dag">2</span><span class="mnd">nov</span></time>
+                    <span class="kat">Neste kurs &middot; Strikking</span>
+                    <h3>Nisselue-kurs</h3>
+                    <p>Strikk din egen nisselue i tide til jul. Passer for deg som kan de grunnleggende maskene fra før.</p>
+                    <ul class="fakta">
+                        <li>Kl. 18:00&ndash;21:00</li>
+                        <li>Fredrikstad</li>
+                        <li>Kr 450</li>
+                    </ul>
+                    <progress value="9" max="12"></progress>
+                    <span class="plasser">3 plasser igjen</span>
+                    <a href="#" class="meld-pa">Meld på</a>
+                </article>
+
+                <article class="kurs-kort" data-kat="hekling">
+                    <time class="dato" datetime="2026-11-09"><span class="dag">9</span><span class="mnd">nov</span></time>
+                    <span class="kat">Hekling</span>
+                    <h3>Nybegynner-hekling</h3>
+                    <p>Lær luftmasker, fastmasker og stavmasker, og hekle en liten grytelapp.</p>
+                    <ul class="fakta">
+                        <li>Kl. 17:30&ndash;20:00</li>
+                        <li>Sarpsborg</li>
+                        <li>Kr 350</li>
+                    </ul>
+                    <progress value="4" max="10"></progress>
+                    <span class="plasser">6 plasser igjen</span>
+                    <a href="#" class="meld-pa">Meld på</a>
+                </article>
+
+                <article class="kurs-kort" data-kat="strikk">
+                    <time class="dato" datetime="2026-11-14"><span class="dag">14</span><span class="mnd">nov</span></time>
+                    <span class="kat">Strikking</span>
+                    <h3>Strikkekafé</h3>
+                    <p>Ta med strikketøyet og kom innom for en prat, kaffe og inspirasjon.</p>
+                    <ul class="fakta">
+                        <li>Kl. 11:00&ndash;14:00</li>
+                        <li>Moss</li>
+                        <li>Gratis</li>
+                    </ul>
+                    <progress value="14" max="20"></progress>
+                    <span class="plasser">6 plasser igjen</span>
+                    <a href="#" class="meld-pa">Meld på</a>
+                </article>
+
+                <article class="kurs-kort" data-kat="sy">
+                    <time class="dato" datetime="2026-11-21"><span class="dag">21</span><span class="mnd">nov</span></time>
+                    <span class="kat">Søm og vev</span>
+                    <h3>Vev en løper</h3>
+                    <p>Prøv vevstolen og lag en bordløper i ull som du tar med hjem.</p>
+                    <ul class="fakta">
+                        <li>Kl. 10:00&ndash;15:00</li>
+                        <li>Halden</li>
+                        <li>Kr 700</li>
+                    </ul>
+                    <progress value="8" max="8"></progress>
+                    <span class="plasser fullt">Fulltegnet</span>
+                    <a href="#" class="meld-pa">Venteliste</a>
+                </article>
+            </section>
+        </fieldset>
+    </main>
+
+    <footer>
+        <p>Østfold Husflidslag</p>
+        <a href="kontaktoss.html" class="kontaktoss">Kontakt oss</a>
+        <p>Sentralbord: 22 00 87 00</p>
+        <a href="mailto:post@husflid.no">post@husflid.no</a>
+    </footer>
+</body>
+</html>
