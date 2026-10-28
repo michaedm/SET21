@@ -1,0 +1,5 @@
+.env
+target/
+.vscode/
+.git/
+dependency-reduced-pom.xml
