@@ -288,3 +288,32 @@ progress {
 .meld-pa:hover {
     background: #923947;
 }
+.admin-skjema {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    max-width: 40rem;
+    background: #fff9f9;
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.admin-skjema input,
+.admin-skjema textarea {
+    padding: 0.6rem;
+    margin-bottom: 0.8rem;
+    border: 1px solid var(--basic-gray);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.admin-skjema button {
+    padding: 0.7rem;
+    border: none;
+    border-radius: 6px;
+    background: #a8364f;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
