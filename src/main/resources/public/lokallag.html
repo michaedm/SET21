@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finn lokallag - Østfold Husflidslag</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ---------- Finn lokallag ---------- */
+
+        main {
+            padding: 1rem;
+        }
+
+        .ingress {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .filter {
+            border: 1px solid #e0d2d2;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .filter input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .filter label {
+            display: inline-block;
+            padding: 8px 14px;
+            margin: 4px;
+            border-radius: 20px;
+            background: #f8f6f3;
+            cursor: pointer;
+        }
+
+        .filter input:checked + label {
+            background: #b54b5a;
+            color: white;
+        }
+
+        /* Viser bare lokallagene i valgt region */
+        .filter:has(#f-glomma:checked) .lag-kort:not([data-region="glomma"]),
+        .filter:has(#f-moss:checked) .lag-kort:not([data-region="moss"]),
+        .filter:has(#f-indre:checked) .lag-kort:not([data-region="indre"]),
+        .filter:has(#f-halden:checked) .lag-kort:not([data-region="halden"]) {
+            display: none;
+        }
+
+        .lag-liste {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .lag-kort {
+            background: #fff9f9;
+            padding: 0;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            overflow: hidden;
+        }
+
+        .lag-bilde {
+            width: 100%;
+            height: 9rem;
+            object-fit: cover;
+        }
+
+        .lag-innhold {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 1.2rem;
+        }
+
+        .lag-kort h3 {
+            margin: 0.5rem 0;
+        }
+
+        .lag-kort p {
+            line-height: 1.5;
+        }
+
+        .kat {
+            color: #b54b5a;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .fakta {
+            padding-left: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            margin: 0 0 1rem;
+        }
+
+        .fakta a {
+            color: #555;
+            font-weight: normal;
+            align-self: auto;
+        }
+
+        .medlemmer {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: auto;
+        }
+
+        .ta-kontakt {
+            display: block;
+            background: #b54b5a;
+            color: white !important;
+            text-decoration: none;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 1rem;
+            align-self: stretch !important;
+        }
+
+        .ta-kontakt:hover {
+            background: #923947;
+        }
+
+        footer {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0d2d2;
+            color: #555;
+        }
+
+        footer a {
+            color: #000;
+            text-decoration: none;
+            align-self: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img class="logo" src="img/nh-logo.jpg" alt="Norges Husflidslag">
+        <h1>Østfold husflid</h1>
+        <a href="login.html" class="logginn-knapp">Logg inn</a>
+    </header>
+
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Siste nytt</a></li>
+            <li><a href="lokallag.html" aria-current="page">Finn lokallag</a></li>
+            <li><a href="kurs.html">Kurs</a></li>
+            <li><a href="kontaktoss.html">Kontakt oss</a></li>
+        </ul>
+        <aside>
+            <a href="admin.html" class="admin-knapp">Admin</a>
+        </aside>
+    </nav>
+
+    <main>
+        <h2>Finn lokallag</h2>
+        <p class="ingress">Det finnes husflidslag over hele Østfold. Bli med på strikkekafé, vevkveld eller kurs i nærheten av deg. Velg en region for å finne laget ditt.</p>
+
+        <fieldset class="filter">
+            <legend>Velg region</legend>
+
+            <input type="radio" name="region" id="f-alle" checked>
+            <label for="f-alle">Alle</label>
+
+            <input type="radio" name="region" id="f-glomma">
+            <label for="f-glomma">Nedre Glomma</label>
+
+            <input type="radio" name="region" id="f-moss">
+            <label for="f-moss">Mosseregionen</label>
+
+            <input type="radio" name="region" id="f-indre">
+            <label for="f-indre">Indre Østfold</label>
+
+            <input type="radio" name="region" id="f-halden">
+            <label for="f-halden">Halden</label>
+
+            <section class="lag-liste">
+                <article class="lag-kort" data-region="glomma">
+                    <img class="lag-bilde" src="https://picsum.photos/seed/fredrikstad-husflid/600/300" alt="Bilde fra Fredrikstad Husflidslag">
+                    <div class="lag-innhold">
+                        <span class="kat">Nedre Glomma</span>
+                        <h3>Fredrikstad Husflidslag</h3>
+                        <p>Et av de største lagene i fylket, med strikkekafé hver tirsdag og vevstuer i Gamlebyen.</p>
+                        <ul class="fakta">
+                            <li>Møtested: Gamlebyen, Fredrikstad</li>
+                            <li>Leder: Kari Nordmann</li>
+                            <li><a href="mailto:fredrikstad@husflid.no">fredrikstad@husflid.no</a></li>
+                        </ul>
+                        <span class="medlemmer">142 medlemmer</span>
+                        <a href="kontaktoss.html" class="ta-kontakt">Ta kontakt</a>
+                    </div>
+                </article>
+
+                <article class="lag-kort" data-region="glomma">
+                    <img class="lag-bilde" src="https://picsum.photos/seed/sarpsborg-husflid/600/300" alt="Bilde fra Sarpsborg Husflidslag">
+                    <div class="lag-innhold">
+                        <span class="kat">Nedre Glomma</span>
+                        <h3>Sarpsborg Husflidslag</h3>
+                        <p>Hekling, søm og treskjæring. Laget holder nybegynnerkurs hver høst og vår.</p>
+                        <ul class="fakta">
+                            <li>Møtested: Kulturhuset, Sarpsborg</li>
+                            <li>Leder: Ola Hansen</li>
+                            <li><a href="mailto:sarpsborg@husflid.no">sarpsborg@husflid.no</a></li>
+                        </ul>
+                        <span class="medlemmer">98 medlemmer</span>
+                        <a href="kontaktoss.html" class="ta-kontakt">Ta kontakt</a>
+                    </div>
+                </article>
+
+                <article class="lag-kort" data-region="glomma">
+                    <img class="lag-bilde" src="https://picsum.photos/seed/hvaler-husflid/600/300" alt="Bilde fra Hvaler Husflidslag">
+                    <div class="lag-innhold">
+                        <span class="kat">Nedre Glomma</span>
+                        <h3>Hvaler Husflidslag</h3>
+                        <p>Lite og hyggelig lag med fokus på kystkultur, garnbinding og tradisjonell strikk.</p>
+                        <ul class="fakta">
+                            <li>Møtested: Skjærhalden</li>
+                            <li>Leder: Sigrid Olsen</li>
+                            <li><a href="mailto:hvaler@husflid.no">hvaler@husflid.no</a></li>
+                        </ul>
+                        <span class="medlemmer">34 medlemmer</span>
+                        <a href="kontaktoss.html" class="ta-kontakt">Ta kontakt</a>
+                    </div>
+                </article>
+
+                <article class="lag-kort" data-region="moss">
+                    <img class="lag-bilde" src="https://picsum.photos/seed/moss-husflid/600/300" alt="Bilde fra Moss Husflidslag">
+                    <div class="lag-innhold">
+                        <span class="kat">Mosseregionen</span>
+                        <h3>Moss Husflidslag</h3>
+                        <p>Aktivt lag med strikkekafé, bunadsøm og egne kurs for barn og unge.</p>
+                        <ul class="fakta">
+                            <li>Møtested: Verket, Moss</li>
+                            <li>Leder: Ingrid Berg</li>
+                            <li><a href="mailto:moss@husflid.no">moss@husflid.no</a></li>
+                        </ul>
+                        <span class="medlemmer">87 medlemmer</span>
+                        <a href="kontaktoss.html" class="ta-kontakt">Ta kontakt</a>
+                    </div>
+                </article>
+
+                <article class="lag-kort" data-region="moss">
+                    <img class="lag-bilde" src="https://picsum.photos/seed/rade-husflid/600/300" alt="Bilde fra Råde Husflidslag">
+                    <div class="lag-innhold">
+                        <span class="kat">Mosseregionen</span>
+                        <h3>Råde Husflidslag</h3>
+                        <p>Vi møtes annenhver torsdag for vev, søm og en god kopp kaffe.</p>
+                        <ul class="fakta">
+                            <li>Møtested: Råde bygdetun</li>
+                            <li>Leder: Lars Johansen</li>
+                            <li><a href="mailto:rade@husflid.no">rade@husflid.no</a></li>
+                        </ul>
+                        <span class="medlemmer">41 medlemmer</span>
+                        <a href="kontaktoss.html" class="ta-kontakt">Ta kontakt</a>
+                    </div>
+                </article>
+
+                <article class="lag-kort" data-region="indre">
+                    <img class="lag-bilde" src="https://picsum.photos/seed/askim-husflid/600/300" alt="Bilde fra Askim Husflidslag">
+                    <div class="lag-innhold">
+                        <span class="kat">Indre Østfold</span>
+                        <h3>Askim Husflidslag</h3>
+                        <p>Kjent for sine vevkurs og den årlige julemessen i Askim sentrum.</p>
+                        <ul class="fakta">
+                            <li>Møtested: Askim kulturhus</li>
+                            <li>Leder: Erik Larsen</li>
+                            <li><a href="mailto:askim@husflid.no">askim@husflid.no</a></li>
+                        </ul>
+                        <span class="medlemmer">76 medlemmer</span>
+                        <a href="kontaktoss.html" class="ta-kontakt">Ta kontakt</a>
+                    </div>
+                </article>
+
+                <article class="lag-kort" data-region="indre">
+                    <img class="lag-bilde" src="https://picsum.photos/seed/rakkestad-husflid/600/300" alt="Bilde fra Rakkestad Husflidslag">
+                    <div class="lag-innhold">
+                        <span class="kat">Indre Østfold</span>
+                        <h3>Rakkestad Husflidslag</h3>
+                        <p>Treskjæring, kniv og tradisjonshåndverk. Nye medlemmer er alltid velkomne.</p>
+                        <ul class="fakta">
+                            <li>Møtested: Rakkestad sentrum</li>
+                            <li>Leder: Anne Pedersen</li>
+                            <li><a href="mailto:rakkestad@husflid.no">rakkestad@husflid.no</a></li>
+                        </ul>
+                        <span class="medlemmer">29 medlemmer</span>
+                        <a href="kontaktoss.html" class="ta-kontakt">Ta kontakt</a>
+                    </div>
+                </article>
+
+                <article class="lag-kort" data-region="halden">
+                    <img class="lag-bilde" src="https://picsum.photos/seed/halden-husflid/600/300" alt="Bilde fra Halden Husflidslag">
+                    <div class="lag-innhold">
+                        <span class="kat">Halden</span>
+                        <h3>Halden Husflidslag</h3>
+                        <p>Laget har egen vevstue med åtte vevstoler, og holder kurs for både nybegynnere og viderekomne.</p>
+                        <ul class="fakta">
+                            <li>Møtested: Fredriksten, Halden</li>
+                            <li>Leder: Per Kristiansen</li>
+                            <li><a href="mailto:halden@husflid.no">halden@husflid.no</a></li>
+                        </ul>
+                        <span class="medlemmer">63 medlemmer</span>
+                        <a href="kontaktoss.html" class="ta-kontakt">Ta kontakt</a>
+                    </div>
+                </article>
+            </section>
+        </fieldset>
+    </main>
+
+    <footer>
+        <p>Østfold Husflidslag</p>
+        <a href="kontaktoss.html" class="kontaktoss">Kontakt oss</a>
+        <p>Sentralbord: 22 00 87 00</p>
+        <a href="mailto:post@husflid.no">post@husflid.no</a>
+    </footer>
+</body>
+</html>
