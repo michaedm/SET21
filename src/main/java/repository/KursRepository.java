@@ -45,7 +45,7 @@ public class KursRepository {
                 new TypeReference<List<Kurs>>() {}
         );
     }
-    public Kurs opprett(Kurs kurs, String acessTokenxString) throws Exception {
+    public Kurs opprett(Kurs kurs, String accessToken) throws Exception {
 
     String supabaseUrl = env.get("SUPABASE_URL");
     String supabaseKey = env.get("SUPABASE_KEY");
