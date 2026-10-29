@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/admin.js"></script>
+</head>
+<body>
+    <header>
+        <img class="logo" src="img/nh-logo.jpg" alt="bilde av logo">
+        <h1>Østfold husflid</h1>
+        <a href="login.html" class="logginn-knapp">Logg inn</a>
+    
+    </header>
+    
+        <nav class="nav">
+        <ul>
+            <li><a href="#">Siste nytt</a></li>
+            <li><a href="#">Finn lokallag</a></li>
+            <li><a href="#">Kurs</a></li>
+            <li><a href="#">Kontakt oss</a></li>
+        </ul>
+
+    <aside>
+      <a href="admin.html" class="admin-knapp">Admin</a>
+    </aside>
+    </nav>
+
+    <main>
+            <h2>Nytt innlegg</h2>
+
+    <form id="admin-skjema" class="admin-skjema">
+        <label for="tittel">Tittel</label>
+        <input type="text" id="tittel" name="tittel" required>
+
+        <label for="innhold">Innhold</label>
+        <textarea id="innhold" name="innhold" rows="8" required></textarea>
+
+        <label for="publisert_dato">Publiseringsdato</label>
+        <input type="date" id="publisert_dato" name="publisert_dato" required>
+
+        <button type="submit">Publiser</button>
+        <p id="melding"></p>
+    </form>
+    </main>
+    
+</body>
+</html>

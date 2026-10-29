@@ -304,3 +304,153 @@ article a {
             text-decoration: none;
             align-self: center;
         }
+
+
+/* ---------- Kursoversikt ---------- */
+
+main {
+    padding: 1rem;
+}
+
+.ingress {
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.filter {
+    border: 1px solid #e0d2d2;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.filter label {
+    display: inline-block;
+    padding: 8px 14px;
+    margin: 4px;
+    border-radius: 20px;
+    background: #f8f6f3;
+    cursor: pointer;
+}
+
+.filter input:checked + label {
+    background: #b54b5a;
+    color: white;
+}
+
+.kurs-liste {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.kurs-kort {
+    background: #fff9f9;
+    padding: 1.2rem;
+    border-radius: 10px;
+    border: 1px solid #eee;
+}
+
+.kurs-kort h3 {
+    margin: 0.5rem 0;
+}
+
+.kurs-kort p {
+    line-height: 1.5;
+}
+
+.kat {
+    color: #b54b5a;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.dato {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    float: right;
+    background: #f8e9eb;
+    color: #b54b5a;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+.dag {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.mnd {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.fakta {
+    padding-left: 1.2rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+progress {
+    width: 100%;
+    accent-color: #b54b5a;
+    margin-top: auto;
+}
+
+.plasser {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+.fullt {
+    color: #b54b5a;
+    font-weight: bold;
+}
+
+.meld-pa {
+    display: block;
+    background: #b54b5a;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 1rem;
+    align-self: stretch;
+}
+
+.meld-pa:hover {
+    background: #923947;
+}
+.admin-skjema {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    max-width: 40rem;
+    background: #fff9f9;
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.admin-skjema input,
+.admin-skjema textarea {
+    padding: 0.6rem;
+    margin-bottom: 0.8rem;
+    border: 1px solid var(--basic-gray);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.admin-skjema button {
+    padding: 0.7rem;
+    border: none;
+    border-radius: 6px;
+    background: #a8364f;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
