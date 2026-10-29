@@ -167,6 +167,143 @@ article a {
     color: #b54b5a;
 }
 
+ main {
+            padding: 1rem;
+        }
+
+        .ingress {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .filter {
+            border: 1px solid #e0d2d2;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .filter input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .filter label {
+            display: inline-block;
+            padding: 8px 14px;
+            margin: 4px;
+            border-radius: 20px;
+            background: #f8f6f3;
+            cursor: pointer;
+        }
+
+        .filter input:checked + label {
+            background: #b54b5a;
+            color: white;
+        }
+
+        /* Viser bare lokallagene i valgt region */
+        .filter:has(#f-glomma:checked) .lag-kort:not([data-region="glomma"]),
+        .filter:has(#f-moss:checked) .lag-kort:not([data-region="moss"]),
+        .filter:has(#f-indre:checked) .lag-kort:not([data-region="indre"]),
+        .filter:has(#f-halden:checked) .lag-kort:not([data-region="halden"]) {
+            display: none;
+        }
+
+        .lag-liste {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .lag-kort {
+            background: #fff9f9;
+            padding: 0;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            overflow: hidden;
+        }
+
+        .lag-bilde {
+            width: 100%;
+            height: 9rem;
+            object-fit: cover;
+        }
+
+        .lag-innhold {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 1.2rem;
+        }
+
+        .lag-kort h3 {
+            margin: 0.5rem 0;
+        }
+
+        .lag-kort p {
+            line-height: 1.5;
+        }
+
+        .kat {
+            color: #b54b5a;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .fakta {
+            padding-left: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            margin: 0 0 1rem;
+        }
+
+        .fakta a {
+            color: #555;
+            font-weight: normal;
+            align-self: auto;
+        }
+
+        .medlemmer {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: auto;
+        }
+
+        .ta-kontakt {
+            display: block;
+            background: #b54b5a;
+            color: white !important;
+            text-decoration: none;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 1rem;
+            align-self: stretch !important;
+        }
+
+        .ta-kontakt:hover {
+            background: #923947;
+        }
+
+        footer {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0d2d2;
+            color: #555;
+        }
+
+        footer a {
+            color: #000;
+            text-decoration: none;
+            align-self: center;
+        }
 
 
 /* ---------- Kursoversikt ---------- */
