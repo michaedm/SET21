@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt oss - Østfold Husflidslag</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ---------- Kontakt oss ---------- */
+
+        main {
+            padding: 1rem;
+        }
+
+        .ingress {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .kontakt-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-boks {
+            background: #f8f6f3;
+            padding: 1.2rem;
+            border-radius: 10px;
+        }
+
+        .info-boks h3 {
+            margin: 0 0 0.5rem;
+            color: #b54b5a;
+            font-size: 1rem;
+        }
+
+        .info-boks p {
+            margin: 0;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .info-boks a {
+            color: #000;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .ansatte-liste {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .ansatt-kort {
+            background: #fff9f9;
+            padding: 1.2rem;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            align-items: center;
+            text-align: center;
+        }
+
+        .ansatt-bilde {
+            width: 7rem;
+            height: 7rem;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #f8e9eb;
+            margin-bottom: 0.8rem;
+        }
+
+        .ansatt-kort h3 {
+            margin: 0 0 4px;
+        }
+
+        .rolle {
+            color: #b54b5a;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+        }
+
+        .ansatt-kort ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .ansatt-kort ul a {
+            color: #555;
+            font-weight: normal;
+        }
+
+        #kontakt-skjema {
+            max-width: 500px;
+            padding: 2rem;
+            background-color: #f8f6f3;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        #kontakt-skjema input,
+        #kontakt-skjema select,
+        #kontakt-skjema textarea {
+            padding: 0.7rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        #kontakt-skjema textarea {
+            min-height: 8rem;
+            resize: vertical;
+        }
+
+        #kontakt-skjema button {
+            margin-top: 0.5rem;
+            padding: 0.7rem;
+            border: none;
+            border-radius: 6px;
+            background-color: #b54b5a;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #kontakt-skjema button:hover {
+            background: #923947;
+        }
+
+        footer {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0d2d2;
+            color: #555;
+        }
+
+        footer a {
+            color: #000;
+            text-decoration: none;
+            align-self: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img class="logo" src="img/nh-logo.jpg" alt="Norges Husflidslag">
+        <h1>Østfold husflid</h1>
+        <a href="login.html" class="logginn-knapp">Logg inn</a>
+    </header>
+
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Siste nytt</a></li>
+            <li><a href="lokallag.html">Finn lokallag</a></li>
+            <li><a href="kurs.html">Kurs</a></li>
+            <li><a href="kontaktoss.html" aria-current="page">Kontakt oss</a></li>
+        </ul>
+        <aside>
+            <a href="admin.html" class="admin-knapp">Admin</a>
+        </aside>
+    </nav>
+
+    <main>
+        <h2>Kontakt oss</h2>
+        <p class="ingress">Har du spørsmål om kurs, lokallag eller medlemskap? Ta gjerne kontakt med en av oss, eller send oss en melding i skjemaet nederst på siden.</p>
+
+        <section class="kontakt-info">
+            <article class="info-boks">
+                <h3>Besøksadresse</h3>
+                <p>Storgata 12<br>1607 Fredrikstad</p>
+            </article>
+
+            <article class="info-boks">
+                <h3>Telefon og e-post</h3>
+                <p>Sentralbord: 22 00 87 00<br>
+                <a href="mailto:post@husflid.no">post@husflid.no</a></p>
+            </article>
+
+            <article class="info-boks">
+                <h3>Åpningstider</h3>
+                <p>Mandag&ndash;fredag: 09:00&ndash;15:00<br>Lørdag og søndag: stengt</p>
+            </article>
+        </section>
+
+        <h2>Ansatte</h2>
+        <section class="ansatte-liste">
+            <article class="ansatt-kort">
+                <img class="ansatt-bilde" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Bilde av Kari Nordmann">
+                <h3>Kari Nordmann</h3>
+                <span class="rolle">Daglig leder</span>
+                <ul>
+                    <li><a href="tel:+4791234567">912 34 567</a></li>
+                    <li><a href="mailto:kari.nordmann@husflid.no">kari.nordmann@husflid.no</a></li>
+                </ul>
+            </article>
+
+            <article class="ansatt-kort">
+                <img class="ansatt-bilde" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Bilde av Ola Hansen">
+                <h3>Ola Hansen</h3>
+                <span class="rolle">Kursansvarlig</span>
+                <ul>
+                    <li><a href="tel:+4792345678">923 45 678</a></li>
+                    <li><a href="mailto:ola.hansen@husflid.no">ola.hansen@husflid.no</a></li>
+                </ul>
+            </article>
+
+            <article class="ansatt-kort">
+                <img class="ansatt-bilde" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Bilde av Ingrid Berg">
+                <h3>Ingrid Berg</h3>
+                <span class="rolle">Lokallagskontakt</span>
+                <ul>
+                    <li><a href="tel:+4793456789">934 56 789</a></li>
+                    <li><a href="mailto:ingrid.berg@husflid.no">ingrid.berg@husflid.no</a></li>
+                </ul>
+            </article>
+
+            <article class="ansatt-kort">
+                <img class="ansatt-bilde" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Bilde av Lars Johansen">
+                <h3>Lars Johansen</h3>
+                <span class="rolle">Medlemsservice</span>
+                <ul>
+                    <li><a href="tel:+4794567890">945 67 890</a></li>
+                    <li><a href="mailto:lars.johansen@husflid.no">lars.johansen@husflid.no</a></li>
+                </ul>
+            </article>
+
+            <article class="ansatt-kort">
+                <img class="ansatt-bilde" src="https://randomuser.me/api/portraits/women/21.jpg" alt="Bilde av Sigrid Olsen">
+                <h3>Sigrid Olsen</h3>
+                <span class="rolle">Kommunikasjon</span>
+                <ul>
+                    <li><a href="tel:+4795678901">956 78 901</a></li>
+                    <li><a href="mailto:sigrid.olsen@husflid.no">sigrid.olsen@husflid.no</a></li>
+                </ul>
+            </article>
+
+            <article class="ansatt-kort">
+                <img class="ansatt-bilde" src="https://randomuser.me/api/portraits/men/46.jpg" alt="Bilde av Erik Larsen">
+                <h3>Erik Larsen</h3>
+                <span class="rolle">Butikkansvarlig</span>
+                <ul>
+                    <li><a href="tel:+4796789012">967 89 012</a></li>
+                    <li><a href="mailto:erik.larsen@husflid.no">erik.larsen@husflid.no</a></li>
+                </ul>
+            </article>
+        </section>
+
+        <h2>Send oss en melding</h2>
+        <form id="kontakt-skjema">
+            <label for="navn">Navn</label>
+            <input type="text" id="navn" name="navn" required>
+
+            <label for="epost">E-post</label>
+            <input type="email" id="epost" name="epost" required>
+
+            <label for="emne">Emne</label>
+            <select id="emne" name="emne">
+                <option>Kurs</option>
+                <option>Lokallag</option>
+                <option>Medlemskap</option>
+                <option>Annet</option>
+            </select>
+
+            <label for="melding-tekst">Melding</label>
+            <textarea id="melding-tekst" name="melding" required></textarea>
+
+            <button type="submit">Send melding</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>Østfold Husflidslag</p>
+        <a href="kontaktoss.html" class="kontaktoss">Kontakt oss</a>
+        <p>Sentralbord: 22 00 87 00</p>
+        <a href="mailto:post@husflid.no">post@husflid.no</a>
+    </footer>
+</body>
+</html>
