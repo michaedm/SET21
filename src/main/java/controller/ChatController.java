@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import model.ChatInput;
+import io.github.cdimascio.dotenv.Dotenv;
+import repository.ChatModell;
+import repository.GradioRepository;
 import repository.OllamaRepository;
 
 import java.util.List;
@@ -16,11 +19,22 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  *   POST /api/chat   { "melding": "..." }  ->  { "svar": "..." }   (offentlig)
  *
- * Meldingen sendes videre til språkmodellen (se OllamaRepository).
+ * Meldingen sendes videre til språkmodellen Kari (se ChatModell).
  */
 public class ChatController {
 
-    private static final OllamaRepository repository = new OllamaRepository();
+    private static final ChatModell repository = velgModell();
+
+    /** Kari-Spacet på Hugging Face hvis KARI_SPACE_URL er satt (Render), ellers Ollama (Docker). */
+    private static ChatModell velgModell() {
+        Dotenv env = Dotenv.configure().ignoreIfMissing().load();
+        String space = env.get("KARI_SPACE_URL", "");
+        if (!space.isBlank()) {
+            System.out.println("[ChatController] Bruker Kari-Spacet: " + space);
+            return new GradioRepository(space.trim(), env.get("HF_TOKEN", ""));
+        }
+        return new OllamaRepository();
+    }
     private static final ObjectMapper mapper = new ObjectMapper();
 
     // Enkel grense: maks antall spørsmål per IP-adresse per minutt

@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const knapp = document.createElement("button");
     knapp.className = "chat-knapp";
-    knapp.setAttribute("aria-label", "Åpne chat");
+    knapp.setAttribute("aria-label", "Åpne chat med Kari");
     knapp.textContent = "💬";
 
     const vindu = document.createElement("section");
@@ -11,12 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
     vindu.hidden = true;
     vindu.innerHTML = `
         <header class="chat-topp">
-            <span>Spør oss om husflid</span>
+            <span>Kari – spør om husflid</span>
             <button class="chat-lukk" aria-label="Lukk chat">×</button>
         </header>
         <div class="chat-meldinger" aria-live="polite"></div>
         <form class="chat-skjema">
-            <input type="text" maxlength="500" placeholder="Skriv et spørsmål …" aria-label="Melding" required>
+            <input type="text" maxlength="500" placeholder="Spør Kari …" aria-label="Melding" required>
             <button type="submit">Send</button>
         </form>
         <p class="chat-merknad">Eksempel – svarene kan inneholde feil.</p>
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         vindu.hidden = !vindu.hidden;
         if (!vindu.hidden) {
             if (!meldinger.hasChildNodes()) {
-                visMelding("Hei! Jeg kan svare på spørsmål om husflid og håndverk.", "bot");
+                visMelding("Hei! Jeg heter Kari. Jeg kan svare på spørsmål om husflid og håndverk.", "bot");
             }
             felt.focus();
         }

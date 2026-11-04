@@ -21,15 +21,7 @@ import java.util.Map;
  *   Docker Compose:  http://ollama:7860
  *   Hugging Face:    https://<bruker>-set21-ollama.hf.space (sammen med HF_TOKEN)
  */
-public class OllamaRepository {
-
-    private static final String SYSTEMINSTRUKS = """
-            Du er en vennlig assistent på nettsiden til Østfold husflid.
-            Svar kort (2-3 setninger) på norsk bokmål, som vanlig tekst uten markdown.
-            Du kan forklare husflid, håndverk, strikking, veving og lignende.
-            Ikke finn på adresser, datoer, priser eller lenker.
-            Hvis du ikke vet svaret, si at brukeren kan kontakte oss via Kontakt oss-siden.
-            """;
+public class OllamaRepository implements ChatModell {
 
     private final Dotenv env = Dotenv.configure().ignoreIfMissing().load();
     private final HttpClient client = HttpClient.newBuilder()
@@ -37,7 +29,7 @@ public class OllamaRepository {
             .build();
     private final ObjectMapper mapper = new ObjectMapper();
 
-    /** Sender meldingen til modellen og returnerer svaret som tekst. */
+    @Override
     public String spor(String melding) throws Exception {
         String ollamaUrl = env.get("OLLAMA_URL", "http://localhost:7860");
         String modell = env.get("OLLAMA_MODEL", "gemma3:1b");
