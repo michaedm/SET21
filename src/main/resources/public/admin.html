@@ -9,7 +9,9 @@
 </head>
 <body>
     <header>
-        <img class="logo" src="img/nh-logo.jpg" alt="bilde av logo">
+        <a href="index.html">
+    <img class="logo" src="img/nh-logo.jpg" alt="Norges Husflidslag, til forsiden">
+</a>
         <h1>Østfold husflid</h1>
         <a href="login.html" class="logginn-knapp">Logg inn</a>
     
@@ -40,6 +42,9 @@
 
         <label for="publisert_dato">Publiseringsdato</label>
         <input type="date" id="publisert_dato" name="publisert_dato" required>
+
+        <label for="bilde">Bilde</label>
+        <input type="file" id="bilde" name="bilde" accept="image/*">
 
         <button type="submit">Publiser</button>
         <p id="melding"></p>
