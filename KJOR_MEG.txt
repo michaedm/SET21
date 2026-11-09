@@ -1,0 +1,21 @@
+Østfold husflid med chatbot – slik starter du
+=============================================
+
+Krav: Docker Desktop, minst 8 GB RAM og ca. 10 GB ledig diskplass.
+
+1. Pakk ut mappa.
+2. Legg fila .env i mappa (du får den separat).
+   Den må inneholde:
+       SUPABASE_URL=...
+       SUPABASE_KEY=...
+   Se .env.example.
+3. Start Docker Desktop og vent til den er klar.
+4. Dobbeltklikk på start.bat.
+   Første gang tar det 5-10 minutter. Senere under ett minutt.
+5. Nettleseren åpnes på http://localhost:7070.
+   Chatboten er den røde knappen nederst til høyre.
+
+Når du er ferdig: dobbeltklikk på stopp.bat.
+
+Første svar fra chatboten etter oppstart tar ca. 30-60 sekunder,
+fordi modellen lastes inn. Etterpå svarer den på noen sekunder.
