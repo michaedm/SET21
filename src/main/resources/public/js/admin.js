@@ -19,15 +19,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    // Hent lokallag fra backend
+    // Hent lokallag direkte fra Supabase
     try {
-        const svar = await fetch("/api/lokallag");
+        const { data: lokallagListe, error } = await db
+            .from("lokallag")
+            .select("*")
+            .order("navn", { ascending: true });
 
-        if (!svar.ok) {
-            throw new Error("Kunne ikke hente lokallag.");
+        if (error) {
+            throw error;
         }
-
-        const lokallagListe = await svar.json();
 
         lokallag.innerHTML = '<option value="">Velg lokallag</option>';
 
@@ -39,7 +40,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
     } catch (error) {
-        melding.textContent = error.message;
+        console.error("Feil ved henting av lokallag:", error);
+        melding.textContent = "Kunne ikke hente lokallag fra Supabase.";
         return;
     }
 
@@ -54,7 +56,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             lokallag_id: Number(lokallag.value)
         };
 
-        if (!nyhet.tittel || !nyhet.innhold || !nyhet.publisert_dato || !lokallag.value) {
+        if (
+            !nyhet.tittel ||
+            !nyhet.innhold ||
+            !nyhet.publisert_dato ||
+            !lokallag.value
+        ) {
             melding.textContent = "Fyll ut alle feltene.";
             return;
         }
@@ -82,8 +89,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
             if (!svar.ok) {
-                const { feil } = await svar.json();
-                melding.textContent = feil;
+                const resultat = await svar.json();
+                melding.textContent = resultat.feil || "Kunne ikke publisere nyheten.";
                 return;
             }
 
@@ -91,6 +98,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             melding.textContent = "Nyheten er publisert!";
 
         } catch (error) {
+            console.error("Feil ved publisering:", error);
             melding.textContent = "Noe gikk galt: " + error.message;
         }
     });
