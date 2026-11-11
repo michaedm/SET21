@@ -5,6 +5,8 @@ import controller.NyhetController;
 import io.javalin.Javalin;
 import config.SupabaseClient;
 import repository.KursRepository;
+import repository.NyhetRepository;
+import repository.LokallagRepository;
 
 public class App {
     public static void main(String[] args) {
@@ -17,9 +19,12 @@ public class App {
 
         SupabaseClient supabaseClient = new SupabaseClient();
         KursRepository kursRepository = new KursRepository(supabaseClient);
+        NyhetRepository nyhetRepository = new NyhetRepository(supabaseClient);
+        NyhetController nyhetController = new NyhetController(nyhetRepository);
+        nyhetController.registerRoutes(app);
+        LokallagRepository lokallagRepository = new LokallagRepository(supabaseClient);
 
-        NyhetController.registerRoutes(app);
-        LokallagController.registerRoutes(app);
+        LokallagController.registerRoutes(app, lokallagRepository);
         KursController.registerRoutes(app, kursRepository);
         ChatController.registerRoutes(app);
     }

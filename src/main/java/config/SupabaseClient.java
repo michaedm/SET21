@@ -6,6 +6,7 @@ import java.net.http.HttpClient;
 import java.net.URI;
 import java.net.http.HttpResponse;
 import java.io.IOException;
+import repository.SupabaseException;
 
 
 public class SupabaseClient {
@@ -25,13 +26,13 @@ public class SupabaseClient {
         }
         return builder;
     }
-    public String send(HttpRequest request){
+    public String send(HttpRequest request) throws SupabaseException {
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if(response.statusCode() >= 200 && response.statusCode() < 300){
             return response.body();
             }
-            throw new RuntimeException("Supabase returned an error " + response.statusCode());
+            throw new SupabaseException(response.statusCode(), response.body());
 
         } catch (RuntimeException e) {
                 throw e;
