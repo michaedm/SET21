@@ -1,0 +1,23 @@
+# Starter hele appen med chatbot på én PC: docker compose up -d --build
+# (eller dobbeltklikk på start.bat). Nettsiden åpnes på http://localhost:7070
+services:
+  ollama:
+    build: chatbot
+    restart: unless-stopped
+    healthcheck:                       # "er modellen klar?"
+      test: ["CMD", "ollama", "list"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-7070}:7070"       # PC-ens port : containerens port (endre med APP_PORT)
+    env_file: .env                     # SUPABASE_URL og SUPABASE_KEY
+    environment:
+      OLLAMA_URL: http://ollama:7860   # navnet på tjenesten over
+    depends_on:
+      ollama:
+        condition: service_healthy     # appen starter når modellen er klar

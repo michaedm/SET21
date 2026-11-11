@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="js/admin.js"></script>
 </head>
 <body>
@@ -40,6 +41,11 @@
 
         <label for="publisert_dato">Publiseringsdato</label>
         <input type="date" id="publisert_dato" name="publisert_dato" required>
+
+        <label for="lokallag_id">Lokallag</label>
+        <select id="lokallag_id" name="lokallag_id" required>
+            <option value="">Laster lokallag</option>
+        </select>
 
         <button type="submit">Publiser</button>
         <p id="melding"></p>

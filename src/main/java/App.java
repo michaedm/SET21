@@ -1,3 +1,4 @@
+import controller.ChatController;
 import controller.KursController;
 import controller.LokallagController;
 import controller.NyhetController;
@@ -20,5 +21,6 @@ public class App {
         NyhetController.registerRoutes(app);
         LokallagController.registerRoutes(app);
         KursController.registerRoutes(app, kursRepository);
+        ChatController.registerRoutes(app);
     }
 }
