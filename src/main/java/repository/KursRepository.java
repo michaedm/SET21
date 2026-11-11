@@ -1,56 +1,41 @@
 package repository;
+import config.SupabaseClient;
 
 import model.Kurs;
-import io.github.cdimascio.dotenv.Dotenv;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import java.net.URI;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
+
 
 public class KursRepository {
 
-    private final Dotenv env = Dotenv.configure().ignoreIfMissing().load();
-    private final HttpClient client = HttpClient.newHttpClient();
+    private final SupabaseClient supabaseClient;
     private final ObjectMapper mapper = new ObjectMapper();
+
+    public KursRepository(SupabaseClient supabaseClient) {
+        this.supabaseClient = supabaseClient;
+    }
 
     public List<Kurs> hentAlle() throws Exception {
 
-        String supabaseUrl = env.get("SUPABASE_URL");
-        String supabaseKey = env.get("SUPABASE_KEY");
-
-        String apiUrl = supabaseUrl + "/rest/v1/kurs?select=*&order=startdato.asc";
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(apiUrl))
-                .header("apikey", supabaseKey)
-                .header("Authorization", "Bearer " + supabaseKey)
+        HttpRequest request = supabaseClient.request("/rest/v1/kurs?select=*&order=startdato.asc", null)
                 .GET()
                 .build();
 
-        HttpResponse<String> response = client.send(request,
-                HttpResponse.BodyHandlers.ofString());
+        String response = supabaseClient.send(request);
 
-        System.out.println("Supabase status: " + response.statusCode());
-        System.out.println("Supabase response: " + response.body());
+
+        System.out.println("Supabase response: " + response);
         
-        if (response.statusCode() != 200) {
-                throw new RuntimeException("Supabase GET failed: HTTP " + response.statusCode());
-        }
         return mapper.readValue(
-                response.body(),
+                response,
                 new TypeReference<List<Kurs>>() {}
         );
     }
     public Kurs opprett(Kurs kurs, String accessToken) throws Exception {
 
-    String supabaseUrl = env.get("SUPABASE_URL");
-    String supabaseKey = env.get("SUPABASE_KEY");
-
-    String apiUrl = supabaseUrl + "/rest/v1/kurs";
 
     java.util.Map<String, Object> data = new java.util.LinkedHashMap<>();
 
@@ -67,28 +52,17 @@ public class KursRepository {
 
     String json = mapper.writeValueAsString(data);
 
-    HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(apiUrl))
-            .header("apikey", supabaseKey)
-            .header("Authorization", "Bearer " + accessToken)
+    HttpRequest request = supabaseClient.request("/rest/v1/kurs", accessToken)
             .header("Content-Type", "application/json")
             .header("Prefer", "return=representation")
             .POST(HttpRequest.BodyPublishers.ofString(json))
             .build();
 
-    HttpResponse<String> response = client.send(request,
-            HttpResponse.BodyHandlers.ofString()
-            
-    );
+    String response = supabaseClient.send(request);
 
-    if (response.statusCode() != 201) {
-        throw new RuntimeException(
-                "Kunne ikke lagre kurs: " + response.body()
-        );
-    }
 
     List<Kurs> lagret = mapper.readValue(
-            response.body(),
+            response,
             new TypeReference<List<Kurs>>() {}
     );
 
