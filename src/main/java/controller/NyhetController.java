@@ -2,6 +2,8 @@ package controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import controller.NyhetController.ApiFeil;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import model.Nyhet;
@@ -28,17 +30,21 @@ import java.util.Map;
  */
 public class NyhetController {
 
-    private static final NyhetRepository repository = new NyhetRepository();
     private static final ObjectMapper mapper = new ObjectMapper();
     private static final ZoneId NORGE = ZoneId.of("Europe/Oslo");
     private static final int MAKS_ANTALL = 100;
+    private final NyhetRepository repository;
 
-    public static void registerRoutes(Javalin app) {
-        app.get("/api/nyheter", NyhetController::hentAlle);
-        app.get("/api/nyheter/{id}", NyhetController::hentEn);
-        app.post("/api/nyheter", NyhetController::opprett);
-        app.put("/api/nyheter/{id}", NyhetController::oppdater);
-        app.delete("/api/nyheter/{id}", NyhetController::slett);
+    public NyhetController(NyhetRepository repository) {
+        this.repository = repository;
+    }
+
+    public void registerRoutes(Javalin app) {
+        app.get("/api/nyheter", this::hentAlle);
+        app.get("/api/nyheter/{id}", this::hentEn);
+        app.post("/api/nyheter", this::opprett);
+        app.put("/api/nyheter/{id}", this::oppdater);
+        app.delete("/api/nyheter/{id}", this::slett);
 
         app.exception(ApiFeil.class, (e, ctx) ->
                 ctx.status(e.status).json(Map.of("feil", e.getMessage())));
@@ -63,7 +69,7 @@ public class NyhetController {
 
     // ---------- Handlere ----------
 
-    private static void hentAlle(Context ctx) throws Exception {
+    private void hentAlle(Context ctx) throws Exception {
         Integer lokallagId = valgfrittTall(ctx.queryParam("lokallag_id"), "lokallag_id");
         Integer antall = valgfrittTall(ctx.queryParam("antall"), "antall");
         if (antall != null && antall > MAKS_ANTALL) {
@@ -74,14 +80,14 @@ public class NyhetController {
         ctx.json(nyheter);
     }
 
-    private static void hentEn(Context ctx) throws Exception {
+    private void hentEn(Context ctx) throws Exception {
         int id = nyhetId(ctx);
         Nyhet nyhet = repository.hentEn(id)
                 .orElseThrow(() -> new ApiFeil(404, "Fant ingen nyhet med id " + id));
         ctx.json(nyhet);
     }
 
-    private static void opprett(Context ctx) throws Exception {
+    private void opprett(Context ctx) throws Exception {
         String token = krevInnlogging(ctx);
         NyhetInput nyhet = lesOgValider(ctx);
 
@@ -89,7 +95,7 @@ public class NyhetController {
         ctx.status(201).json(lagret);
     }
 
-    private static void oppdater(Context ctx) throws Exception {
+    private void oppdater(Context ctx) throws Exception {
         String token = krevInnlogging(ctx);
         int id = nyhetId(ctx);
         NyhetInput nyhet = lesOgValider(ctx);
@@ -99,7 +105,7 @@ public class NyhetController {
         ctx.json(endret);
     }
 
-    private static void slett(Context ctx) throws Exception {
+    private void slett(Context ctx) throws Exception {
         String token = krevInnlogging(ctx);
         int id = nyhetId(ctx);
 
