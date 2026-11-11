@@ -577,3 +577,86 @@ progress {
         border-radius: 0;
     }
 }
+
+/* Klikkbare bilder, Les mer-dialog og forstørrelse */
+.klikkbart-bilde {
+    cursor: zoom-in;
+}
+
+.modal-bakgrunn,
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+}
+
+.modal-bakgrunn[hidden],
+.lightbox[hidden] {
+    display: none;
+}
+
+.modal-boks {
+    position: relative;
+    background: #fff;
+    border-radius: 12px;
+    max-width: 640px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 28px;
+    box-sizing: border-box;
+}
+
+.modal-lukk {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    border: none;
+    background: none;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.modal-boks h2 {
+    margin: 0 32px 4px 0;
+}
+
+.modal-dato {
+    display: block;
+    color: #666;
+    margin-bottom: 16px;
+}
+
+.modal-bilde {
+    display: block;
+    max-width: 100%;
+    max-height: 280px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.modal-bilde[hidden] {
+    display: none;
+}
+
+.modal-ingress {
+    font-weight: bold;
+}
+
+.lightbox {
+    cursor: zoom-out;
+    z-index: 1100;
+}
+
+.lightbox img {
+    max-width: 95vw;
+    max-height: 92vh;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
