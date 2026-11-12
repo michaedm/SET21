@@ -1,7 +1,7 @@
 // Påmeldingsskjema.
 // Henter kursene fra /api/kurs til nedtrekkslisten og sender skjemaet som JSON til PAMELDING_URL.
 // NB: /api/pamelding finnes ikke i backend ennå (Michael lager den). Feltnavnene under
-// (kurs_id, fornavn, etternavn, epost, telefon, kommentar) kan justeres etter tabellen i Supabase.
+// (kurs_id, fornavn, etternavn, epost, telefon) kan justeres etter tabellen i Supabase.
 const PAMELDING_URL = "/api/pamelding";
 
 const skjema = document.getElementById("pamelding-skjema");

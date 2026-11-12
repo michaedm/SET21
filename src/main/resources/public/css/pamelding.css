@@ -27,18 +27,12 @@ main {
 }
 
 #pamelding-skjema input,
-#pamelding-skjema select,
-#pamelding-skjema textarea {
+#pamelding-skjema select {
     padding: 0.7rem;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 1rem;
     font-family: inherit;
-}
-
-#pamelding-skjema textarea {
-    min-height: 6rem;
-    resize: vertical;
 }
 
 #pamelding-skjema button {
