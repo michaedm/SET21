@@ -1,21 +1,24 @@
-
 package controller;
-
-import java.util.List;
 
 import io.javalin.Javalin;
 import model.Kurs;
-import repository.KursRepository;
+import service.KursService;
+import service.ValideringException;
 
 public class KursController {
 
-    public static void registerRoutes(Javalin app, KursRepository repository) {
+    private final KursService service;
+
+    public KursController(KursService service) {
+        this.service = service;
+    }
+
+    public void registerRoutes(Javalin app) {
 
         // Hent alle kurs
         app.get("/api/kurs", ctx -> {
             try {
-                List<Kurs> kurs = repository.hentAlle();
-                ctx.json(kurs);
+                ctx.json(service.hentAlle());
             } catch (Exception e) {
                 e.printStackTrace();
                 ctx.status(500).result("Kunne ikke hente kurs");
@@ -27,14 +30,12 @@ public class KursController {
             try {
                 String authorization = ctx.header("Authorization");
 
-                if (authorization == null ||
-                        !authorization.startsWith("Bearer ")) {
+                if (authorization == null || !authorization.startsWith("Bearer ")) {
                     ctx.status(401).result("Du må logge inn");
                     return;
                 }
 
-                String accessToken =
-                        authorization.substring("Bearer ".length()).trim();
+                String accessToken = authorization.substring("Bearer ".length()).trim();
 
                 if (accessToken.isEmpty()) {
                     ctx.status(401).result("Ugyldig innlogging");
@@ -42,18 +43,12 @@ public class KursController {
                 }
 
                 Kurs nyttKurs = ctx.bodyAsClass(Kurs.class);
-
-                if (nyttKurs.tittel() == null ||
-                        nyttKurs.tittel().isBlank()) {
-                    ctx.status(400).result("Tittel er påkrevd");
-                    return;
-                }
-
-                Kurs lagretKurs =
-                        repository.opprett(nyttKurs, accessToken);
+                Kurs lagretKurs = service.opprett(nyttKurs, accessToken);
 
                 ctx.status(201).json(lagretKurs);
 
+            } catch (ValideringException e) {
+                ctx.status(400).result(e.getMessage());
             } catch (Exception e) {
                 e.printStackTrace();
                 ctx.status(500).result("Kunne ikke lagre kurs");
