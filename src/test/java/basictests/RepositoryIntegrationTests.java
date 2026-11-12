@@ -1,5 +1,6 @@
 package basictests;
 
+import config.SupabaseClient;
 import model.Kurs;
 import model.Lokallag;
 import model.Nyhet;
@@ -23,6 +24,7 @@ import java.util.List;
 public class RepositoryIntegrationTests {
 
     private static FakeSupabase supabase;
+    private static final SupabaseClient supabaseClient = new SupabaseClient();
 
     @BeforeAll
     public static void startFakeSupabase() throws Exception {
@@ -48,7 +50,7 @@ public class RepositoryIntegrationTests {
                   "bilde_url": "", "publisert_dato": "2026-09-30", "lokallag_id": 1}]
                 """);
 
-        List<Nyhet> nyheter = new NyhetRepository().hentAlle();
+        List<Nyhet> nyheter = new NyhetRepository(supabaseClient).hentAlle();
 
         Assertions.assertEquals("/rest/v1/publish", supabase.lastPath());
         Assertions.assertEquals("test-key", supabase.lastApiKey());
@@ -63,7 +65,7 @@ public class RepositoryIntegrationTests {
                 [{"lokallag_id": 2, "navn": "Halden"}, {"lokallag_id": 1, "navn": "Moss"}]
                 """);
 
-        List<Lokallag> lokallag = new LokallagRepository().hentAlle();
+        List<Lokallag> lokallag = new LokallagRepository(supabaseClient).hentAlle();
 
         Assertions.assertEquals("/rest/v1/lokallag", supabase.lastPath());
         Assertions.assertTrue(supabase.lastQuery().contains("order=navn.asc"));
@@ -80,7 +82,7 @@ public class RepositoryIntegrationTests {
                   "maks_deltakere": 10, "pris": 250, "status": "aktiv", "lokallag_id": 1}]
                 """);
 
-        List<Kurs> kurs = new KursRepository().hentAlle();
+        List<Kurs> kurs = new KursRepository(supabaseClient).hentAlle();
 
         Assertions.assertEquals("/rest/v1/kurs", supabase.lastPath());
         Assertions.assertTrue(supabase.lastQuery().contains("order=startdato.asc"));
@@ -93,9 +95,9 @@ public class RepositoryIntegrationTests {
     public void emptyTableGivesEmptyList() throws Exception {
         supabase.respondWith(200, "[]");
 
-        Assertions.assertTrue(new NyhetRepository().hentAlle().isEmpty());
-        Assertions.assertTrue(new LokallagRepository().hentAlle().isEmpty());
-        Assertions.assertTrue(new KursRepository().hentAlle().isEmpty());
+        Assertions.assertTrue(new NyhetRepository(supabaseClient).hentAlle().isEmpty());
+        Assertions.assertTrue(new LokallagRepository(supabaseClient).hentAlle().isEmpty());
+        Assertions.assertTrue(new KursRepository(supabaseClient).hentAlle().isEmpty());
     }
 
     @Test
@@ -105,6 +107,6 @@ public class RepositoryIntegrationTests {
                 {"message": "Invalid API key"}
                 """);
 
-        Assertions.assertThrows(Exception.class, () -> new NyhetRepository().hentAlle());
+        Assertions.assertThrows(Exception.class, () -> new NyhetRepository(supabaseClient).hentAlle());
     }
 }
