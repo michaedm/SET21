@@ -27,7 +27,7 @@ Base-adresse lokalt: `http://localhost:7070`
 
 Valgfrie parametere:
 - `lokallag_id` – bare nyheter fra ett lokallag, f.eks. `/api/nyheter?lokallag_id=2`
-- `antall` – maks antall nyheter (høyst 100), f.eks. `/api/nyheter?antall=5` til forsiden
+- `antall` – maks antall nyheter (må være større enn 0, høyst 100), f.eks. `/api/nyheter?antall=5` til forsiden
 
 Sortert på `publisert_dato`, nyeste først.
 

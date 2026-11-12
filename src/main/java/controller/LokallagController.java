@@ -1,19 +1,17 @@
 package controller;
 
-import java.util.List;
-
 import io.javalin.Javalin;
-import model.Lokallag;
-import repository.LokallagRepository;
+import service.LokallagService;
 
 public class LokallagController {
 
+    private final LokallagService service;
 
-    public static void registerRoutes(Javalin app, LokallagRepository repository) {
+    public LokallagController(LokallagService service) {
+        this.service = service;
+    }
 
-        app.get("/api/lokallag", ctx -> {
-            List<Lokallag> lokallag = repository.hentAlle();
-            ctx.json(lokallag);
-        });
+    public void registerRoutes(Javalin app) {
+        app.get("/api/lokallag", ctx -> ctx.json(service.hentAlle()));
     }
 }

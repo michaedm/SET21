@@ -1,12 +1,15 @@
+import config.SupabaseClient;
 import controller.ChatController;
 import controller.KursController;
 import controller.LokallagController;
 import controller.NyhetController;
 import io.javalin.Javalin;
-import config.SupabaseClient;
 import repository.KursRepository;
-import repository.NyhetRepository;
 import repository.LokallagRepository;
+import repository.NyhetRepository;
+import service.KursService;
+import service.LokallagService;
+import service.NyhetService;
 
 public class App {
     public static void main(String[] args) {
@@ -17,15 +20,21 @@ public class App {
             config.staticFiles.add("/public");
         }).start(port);
 
+        // Dependency injection: her lages hvert objekt én gang og sendes videre til den som trenger det.
+        // Rekkefølge: SupabaseClient -> Repository -> Service -> Controller
         SupabaseClient supabaseClient = new SupabaseClient();
-        KursRepository kursRepository = new KursRepository(supabaseClient);
+
         NyhetRepository nyhetRepository = new NyhetRepository(supabaseClient);
-        NyhetController nyhetController = new NyhetController(nyhetRepository);
-        nyhetController.registerRoutes(app);
+        KursRepository kursRepository = new KursRepository(supabaseClient);
         LokallagRepository lokallagRepository = new LokallagRepository(supabaseClient);
 
-        LokallagController.registerRoutes(app, lokallagRepository);
-        KursController.registerRoutes(app, kursRepository);
+        NyhetService nyhetService = new NyhetService(nyhetRepository);
+        KursService kursService = new KursService(kursRepository);
+        LokallagService lokallagService = new LokallagService(lokallagRepository);
+
+        new NyhetController(nyhetService).registerRoutes(app);
+        new KursController(kursService).registerRoutes(app);
+        new LokallagController(lokallagService).registerRoutes(app);
         ChatController.registerRoutes(app);
     }
 }
