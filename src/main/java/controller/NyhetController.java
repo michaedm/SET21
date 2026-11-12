@@ -3,16 +3,15 @@ package controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import controller.NyhetController.ApiFeil;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import model.Nyhet;
 import model.NyhetInput;
-import repository.NyhetRepository;
 import repository.SupabaseException;
+import service.IkkeFunnetException;
+import service.NyhetService;
+import service.ValideringException;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 
@@ -31,12 +30,10 @@ import java.util.Map;
 public class NyhetController {
 
     private static final ObjectMapper mapper = new ObjectMapper();
-    private static final ZoneId NORGE = ZoneId.of("Europe/Oslo");
-    private static final int MAKS_ANTALL = 100;
-    private final NyhetRepository repository;
+    private final NyhetService service;
 
-    public NyhetController(NyhetRepository repository) {
-        this.repository = repository;
+    public NyhetController(NyhetService service) {
+        this.service = service;
     }
 
     public void registerRoutes(Javalin app) {
@@ -48,6 +45,12 @@ public class NyhetController {
 
         app.exception(ApiFeil.class, (e, ctx) ->
                 ctx.status(e.status).json(Map.of("feil", e.getMessage())));
+
+        app.exception(ValideringException.class, (e, ctx) ->
+                ctx.status(400).json(Map.of("feil", e.getMessage())));
+
+        app.exception(IkkeFunnetException.class, (e, ctx) ->
+                ctx.status(404).json(Map.of("feil", e.getMessage())));
 
         app.exception(SupabaseException.class, (e, ctx) -> {
             int status = switch (e.status()) {
@@ -72,46 +75,36 @@ public class NyhetController {
     private void hentAlle(Context ctx) throws Exception {
         Integer lokallagId = valgfrittTall(ctx.queryParam("lokallag_id"), "lokallag_id");
         Integer antall = valgfrittTall(ctx.queryParam("antall"), "antall");
-        if (antall != null && antall > MAKS_ANTALL) {
-            antall = MAKS_ANTALL;
-        }
 
-        List<Nyhet> nyheter = repository.hentAlle(lokallagId, antall);
+        List<Nyhet> nyheter = service.hentAlle(lokallagId, antall);
         ctx.json(nyheter);
     }
 
     private void hentEn(Context ctx) throws Exception {
-        int id = nyhetId(ctx);
-        Nyhet nyhet = repository.hentEn(id)
-                .orElseThrow(() -> new ApiFeil(404, "Fant ingen nyhet med id " + id));
-        ctx.json(nyhet);
+        ctx.json(service.hentEn(nyhetId(ctx)));
     }
 
     private void opprett(Context ctx) throws Exception {
         String token = krevInnlogging(ctx);
-        NyhetInput nyhet = lesOgValider(ctx);
+        NyhetInput nyhet = lesJson(ctx);
 
-        Nyhet lagret = repository.opprett(nyhet, token);
+        Nyhet lagret = service.opprett(nyhet, token);
         ctx.status(201).json(lagret);
     }
 
     private void oppdater(Context ctx) throws Exception {
         String token = krevInnlogging(ctx);
         int id = nyhetId(ctx);
-        NyhetInput nyhet = lesOgValider(ctx);
+        NyhetInput nyhet = lesJson(ctx);
 
-        Nyhet endret = repository.oppdater(id, nyhet, token)
-                .orElseThrow(() -> new ApiFeil(404, "Fant ingen nyhet med id " + id));
-        ctx.json(endret);
+        ctx.json(service.oppdater(id, nyhet, token));
     }
 
     private void slett(Context ctx) throws Exception {
         String token = krevInnlogging(ctx);
         int id = nyhetId(ctx);
 
-        if (!repository.slett(id, token)) {
-            throw new ApiFeil(404, "Fant ingen nyhet med id " + id);
-        }
+        service.slett(id, token);
         ctx.status(204);
     }
 
@@ -130,22 +123,13 @@ public class NyhetController {
         return token;
     }
 
-    private static NyhetInput lesOgValider(Context ctx) {
-        NyhetInput nyhet;
+    /** Gjør JSON-en i forespørselen om til et NyhetInput. Reglene sjekkes i NyhetService. */
+    private static NyhetInput lesJson(Context ctx) {
         try {
-            nyhet = mapper.readValue(ctx.body(), NyhetInput.class);
+            return mapper.readValue(ctx.body(), NyhetInput.class);
         } catch (JsonProcessingException e) {
             throw new ApiFeil(400, "Ugyldig JSON i forespørselen");
         }
-        if (nyhet == null) {
-            throw new ApiFeil(400, "Forespørselen mangler innhold");
-        }
-
-        List<String> feil = nyhet.valider();
-        if (!feil.isEmpty()) {
-            throw new ApiFeil(400, String.join(", ", feil));
-        }
-        return nyhet.klargjort(LocalDate.now(NORGE));
     }
 
     private static int nyhetId(Context ctx) {
@@ -167,7 +151,7 @@ public class NyhetController {
         }
     }
 
-    /** Feil vi selv oppdager (400, 401, 404). Blir til JSON: {"feil": "..."} */
+    /** Feil vi selv oppdager (400 og 401). Blir til JSON: {"feil": "..."} */
     static class ApiFeil extends RuntimeException {
         final int status;
 
