@@ -5,7 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import controller.KursController;
 import controller.LokallagController;
 import controller.NyhetController;
+import config.SupabaseClient;
 import io.javalin.Javalin;
+import repository.KursRepository;
+import repository.LokallagRepository;
+import repository.NyhetRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -37,9 +41,10 @@ public class ApiEndpointTests {
 
         // Samme ruter som App.java, men på en ledig port (0) så den ikke kolliderer med 7070
         app = Javalin.create().start(0);
-        NyhetController.registerRoutes(app);
-        LokallagController.registerRoutes(app);
-        KursController.registerRoutes(app);
+        SupabaseClient supabaseClient = new SupabaseClient();
+        new NyhetController(new NyhetRepository(supabaseClient)).registerRoutes(app);
+        LokallagController.registerRoutes(app, new LokallagRepository(supabaseClient));
+        KursController.registerRoutes(app, new KursRepository(supabaseClient));
     }
 
     @AfterAll
