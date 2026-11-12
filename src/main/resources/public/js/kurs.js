@@ -79,12 +79,8 @@ async function hentKurs() {
             const meldPa = document.createElement("a");
             meldPa.className = "meld-pa";
             meldPa.textContent = "Meld på";
-            meldPa.href = "#";
-
-            meldPa.addEventListener("click", event => {
-                event.preventDefault();
-                alert("Påmelding kommer snart.");
-            });
+            // Går til påmeldingsskjemaet med kurset forhåndsvalgt
+            meldPa.href = `pamelding.html?kurs=${encodeURIComponent(k.kurs_id)}`;
 
             kort.appendChild(dato);
             kort.appendChild(kategori);
