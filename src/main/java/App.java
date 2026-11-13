@@ -10,6 +10,9 @@ import repository.NyhetRepository;
 import service.KursService;
 import service.LokallagService;
 import service.NyhetService;
+import controller.PaameldingController;
+import repository.PaameldingRepository;
+import service.PaameldingService;
 
 public class App {
     public static void main(String[] args) {
@@ -32,9 +35,14 @@ public class App {
         KursService kursService = new KursService(kursRepository);
         LokallagService lokallagService = new LokallagService(lokallagRepository);
 
+        PaameldingRepository paameldingRepository = new PaameldingRepository(supabaseClient);
+        PaameldingService paameldingService = new PaameldingService(paameldingRepository);
+        PaameldingController paameldingController = new PaameldingController(paameldingService);
+
         new NyhetController(nyhetService).registerRoutes(app);
         new KursController(kursService).registerRoutes(app);
         new LokallagController(lokallagService).registerRoutes(app);
         ChatController.registerRoutes(app);
+        paameldingController.registerRoutes(app);
     }
 }
