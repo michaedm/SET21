@@ -62,6 +62,7 @@
           <environmentVariables>
             <SUPABASE_URL>http://localhost:18321</SUPABASE_URL>
             <SUPABASE_KEY>test-key</SUPABASE_KEY>
+            <OLLAMA_URL>http://localhost:18322</OLLAMA_URL>
           </environmentVariables>
         </configuration>
       </plugin>

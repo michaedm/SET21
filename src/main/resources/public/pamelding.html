@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Påmelding - Østfold Husflidslag</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pamelding.css">
+</head>
+<body>
+    <header>
+        <a href="index.html"><img class="logo" src="img/nh-logo.jpg" alt="bilde av logo"></a>
+        <h1>Østfold husflid</h1>
+        <a href="login.html" class="logginn-knapp">Logg inn</a>
+    </header>
+
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Siste nytt</a></li>
+            <li><a href="lokallag.html">Finn lokallag</a></li>
+            <li><a href="kurs.html" aria-current="page">Kurs</a></li>
+            <li><a href="kontaktoss.html">Kontakt oss</a></li>
+        </ul>
+        <aside>
+            <a href="admin.html" class="admin-knapp">Admin</a>
+        </aside>
+    </nav>
+
+    <main>
+        <h2>Meld deg på kurs</h2>
+        <p class="ingress">Fyll ut skjemaet under, så registrerer vi påmeldingen din. Felt merket med * må fylles ut.</p>
+
+        <form id="pamelding-skjema">
+            <label for="kurs">Kurs *</label>
+            <select id="kurs" name="kurs_id" required>
+                <option value="">Laster kurs ...</option>
+            </select>
+
+            <label for="fornavn">Fornavn *</label>
+            <input type="text" id="fornavn" name="fornavn" autocomplete="given-name" required>
+
+            <label for="etternavn">Etternavn *</label>
+            <input type="text" id="etternavn" name="etternavn" autocomplete="family-name" required>
+
+            <label for="epost">E-post *</label>
+            <input type="email" id="epost" name="epost" autocomplete="email" required>
+
+            <label for="telefon">Telefon</label>
+            <input type="tel" id="telefon" name="telefon" autocomplete="tel">
+
+            <p id="pamelding-melding" role="status" aria-live="polite" hidden></p>
+
+            <button type="submit">Meld på</button>
+            <a href="kurs.html" class="tilbake">&larr; Tilbake til kurs</a>
+        </form>
+    </main>
+
+    <footer>
+        <p>Østfold Husflidslag</p>
+        <a href="kontaktoss.html" class="kontaktoss">Kontakt oss</a>
+        <p>Sentralbord: 22 00 87 00</p>
+        <a href="mailto:post@husflid.no">post@husflid.no</a>
+    </footer>
+    <script src="js/pamelding.js" defer></script>
+    <script src="js/chatbot.js" defer></script>
+</body>
+</html>
